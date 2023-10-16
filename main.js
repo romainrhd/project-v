@@ -29,8 +29,11 @@ const starship = new Mesh(starshipGeometry, starshipMaterial);
 scene.add(starship);
 
 const planetGeometry = new SphereGeometry(1, 32, 16); 
-const planetMaterial = new MeshBasicMaterial( {color: 0xffff00 }); 
+const planetMaterial = new MeshNormalMaterial(); 
 const planet = new Mesh(planetGeometry, planetMaterial);
+planet.position.x = 3;
+planet.position.y = 3;
+planet.position.z = -2;
 scene.add(planet);
 
 function animate() {
@@ -52,34 +55,32 @@ window.addEventListener('keydown', (event) => {
   switch (event.code) {
 
     case 'ArrowUp':
-    case 'KeyW': controls.moveForward = true; console.log('ArrowUp');break;
+    case 'KeyW': {
+      starship.position.z -= 1;
+      console.log('FORWARD');
+      break;
+    }
 
     case 'ArrowDown':
-    case 'KeyS': controls.moveBackward = true; break;
+    case 'KeyS': {
+      starship.position.z += 1;
+      console.log('BACKWARD');
+      break;
+    }
 
     case 'ArrowLeft':
-    case 'KeyA': controls.moveLeft = true; break;
+    case 'KeyA': {
+      starship.position.x -= 1;
+      console.log('LEFT');
+      break;
+    }
 
     case 'ArrowRight':
-    case 'KeyD': controls.moveRight = true; break;
-
-  }
-});
-
-window.addEventListener('keyup', (event) => {
-  switch (event.code) {
-
-    case 'ArrowUp':
-    case 'KeyW': controls.moveForward = false; break;
-
-    case 'ArrowDown':
-    case 'KeyS': controls.moveBackward = false; break;
-
-    case 'ArrowLeft':
-    case 'KeyA': controls.moveLeft = false; break;
-
-    case 'ArrowRight':
-    case 'KeyD': controls.moveRight = false; break;
+    case 'KeyD': {
+      starship.position.x += 1;
+      console.log('RIGHT');
+      break;
+    }
 
   }
 });
